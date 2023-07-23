@@ -1,35 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  useColorScheme,
+} from "@mui/material";
 
-function App() {
-  const [count, setCount] = useState(0)
+const ModeSelect = () => {
+  const { mode, setMode } = useColorScheme();
+
+  const handleChangeMode = () => {
+    setMode(mode === "light" ? "dark" : "light");
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <InputLabel id="demo-simple-select-label">Mode</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={mode}
+        label="Mode"
+        onChange={handleChangeMode}
+      >
+        <MenuItem value="light">Light</MenuItem>
+        <MenuItem value="dark">Dark</MenuItem>
+      </Select>
+    </FormControl>
+  );
+};
+
+function App() {
+  return (
+    <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
+      <Box
+        sx={{
+          backgroundColor: "primary.light",
+          width: "100%",
+          height: (theme) => theme.trello.appBarHeight,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <ModeSelect />
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "primary.dark",
+          width: "100%",
+          height: (theme) => theme.trello.boardBarHeight,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Board Bar
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "primary.main",
+          width: "100%",
+          height: (theme) =>
+            `calc(100vh - ${theme.trello.appBarHeight} - ${theme.trello.boardBarHeight})`,
+        }}
+      >
+        Board Content
+      </Box>
+    </Container>
+  );
 }
 
-export default App
+export default App;
