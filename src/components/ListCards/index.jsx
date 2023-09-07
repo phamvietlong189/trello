@@ -16,7 +16,7 @@ const ListCards = ({ cards }) => {
           display: "flex",
           flexDirection: "column",
           gap: 1,
-          p: 2,
+          paddingX: 2,
           overflowX: "hidden",
           overflowY: "auto",
           maxHeight: (theme) =>
@@ -25,7 +25,7 @@ const ListCards = ({ cards }) => {
             } - ${theme.trello.columnFooterHeight})`,
         }}
       >
-        {cards?.length &&
+        {cards?.length > 0 &&
           cards?.map((card) => <CardItem key={card?._id} card={card} />)}
       </Box>
     </SortableContext>

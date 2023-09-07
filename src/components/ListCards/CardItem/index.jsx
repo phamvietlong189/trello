@@ -40,7 +40,9 @@ const CardItem = ({ card }) => {
       sx={{
         cursor: "pointer",
         boxShadow: "0 1px 1px rgba(0, 0, 0, 0.2)",
-        overflow: "unset",
+        opacity: card?.FE_PlaceholderCard ? 0 : 1,
+        height: card?.FE_PlaceholderCard ? "10px" : "unset",
+        overflow: card?.FE_PlaceholderCard ? "hidden" : "unset",
       }}
     >
       {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
